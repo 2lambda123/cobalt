@@ -22,14 +22,17 @@ namespace starboard {
 namespace nplb {
 namespace {
 
-#if SB_API_VERSION <= 15
 int Format(wchar_t* out_buffer,
            size_t buffer_size,
            const wchar_t* format,
            ...) {
   va_list arguments;
   va_start(arguments, format);
+#if SB_API_VERSION < 16
   int result = SbStringFormatWide(out_buffer, buffer_size, format, arguments);
+#else
+  int result = vswprintf(out_buffer, buffer_size, format, arguments);
+#endif
   va_end(arguments);
   return result;
 }
@@ -45,7 +48,6 @@ TEST(SbStringFormatWideTest, SunnyDay) {
     EXPECT_EQ(kExpected[i], destination[i]);
   }
 }
-#endif
 
 }  // namespace
 }  // namespace nplb

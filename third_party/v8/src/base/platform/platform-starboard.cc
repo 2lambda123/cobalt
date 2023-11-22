@@ -6,8 +6,6 @@
 // abstraction layer for Cobalt, an HTML5 container used mainly by YouTube
 // apps in the living room.
 
-#include <stdio.h>
-
 #include "src/base/lazy-instance.h"
 #include "src/base/macros.h"
 #include "src/base/platform/platform.h"
@@ -347,7 +345,12 @@ int OS::SNPrintF(char* str, int length, const char* format, ...) {
 }
 
 int OS::VSNPrintF(char* str, int length, const char* format, va_list args) {
+#if SB_API_VERSION < 16
+  int n = SbStringFormat(str, length, format, args);
+#else
+#include <stdio.h>
   int n = vsnprintf(str, length, format, args);
+#endif
   if (n < 0 || n >= length) {
     // If the length is zero, the assignment fails.
     if (length > 0) str[length - 1] = '\0';

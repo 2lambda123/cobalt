@@ -35,6 +35,7 @@ static size_t sw_write(FILE *f, const unsigned char *s, size_t l)
 	return l0;
 }
 
+#if SB_API_VERSION >= 16
 int vswprintf(wchar_t *restrict s, size_t n, const wchar_t *restrict fmt, va_list ap)
 {
 	int r;
@@ -59,3 +60,4 @@ int vswprintf(wchar_t *restrict s, size_t n, const wchar_t *restrict fmt, va_lis
 	sw_write(&f, 0, 0);
 	return r>=n ? -1 : r;
 }
+#endif

@@ -9,7 +9,9 @@
 
 #include <ctype.h>
 #include <stdarg.h>   // va_list
+#if SB_API_VERSION >= 16
 #include <stdio.h>
+#endif
 
 #include <initializer_list>
 #include <string>

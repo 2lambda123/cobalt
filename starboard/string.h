@@ -21,7 +21,7 @@
 
 #include <stdarg.h>
 #include <stdio.h>
-#if SB_API_VERSION <= 15
+#if SB_API_VERSION < 16
 #include <wchar.h>
 #endif
 
@@ -40,7 +40,6 @@ extern "C" {
 //
 // |source|: The string to be copied.
 SB_EXPORT char* SbStringDuplicate(const char* source);
-#endif  // SB_API_VERSION < 16
 
 // Compares two strings, ignoring differences in case. The return value is:
 // - |< 0| if |string1| is ASCII-betically lower than |string2|.
@@ -67,8 +66,9 @@ SB_EXPORT int SbStringCompareNoCase(const char* string1, const char* string2);
 SB_EXPORT int SbStringCompareNoCaseN(const char* string1,
                                      const char* string2,
                                      size_t count);
+#endif  // SB_API_VERSION < 16
 
-#if SB_API_VERSION <= 15
+#if SB_API_VERSION < 16
 // Produces a string formatted with |format| and |arguments|, placing as much
 // of the result that will fit into |out_buffer|. The return value specifies
 // the number of characters that the format would produce if |buffer_size| were

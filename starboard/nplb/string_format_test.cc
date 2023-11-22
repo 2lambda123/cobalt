@@ -25,7 +25,11 @@ namespace {
 int Format(char* out_buffer, size_t buffer_size, const char* format, ...) {
   va_list arguments;
   va_start(arguments, format);
+#if SB_API_VERSION < 16
+  int result = SbStringFormat(out_buffer, buffer_size, format, arguments);
+#else
   int result = vsnprintf(out_buffer, buffer_size, format, arguments);
+#endif
   va_end(arguments);
   return result;
 }

@@ -25,7 +25,11 @@ std::string FormatString(const char* msg, va_list args) {
   va_list args_copy;
   va_copy(args_copy, args);
 
+#if SB_API_VERSION < 16
+  int expected_size = ::SbStringFormat(NULL, 0, msg, args_copy);
+#else
   int expected_size = ::vsnprintf(NULL, 0, msg, args_copy);
+#endif
 
   va_end(args_copy);
 
@@ -34,7 +38,11 @@ std::string FormatString(const char* msg, va_list args) {
   }
 
   std::vector<char> buffer(expected_size + 1);
+#if SB_API_VERSION < 16
+  ::SbStringFormat(buffer.data(), buffer.size(), msg, args);
+#else
   ::vsnprintf(buffer.data(), buffer.size(), msg, args);
+#endif
   return std::string(buffer.data(), expected_size);
 }
 
