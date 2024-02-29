@@ -1,0 +1,20 @@
+repo_name: 2lambda123/cobalt
+report_id: d7410bfe3a6bb6bfad6b10ae10a1d8b7
+version: 0.1
+repo_type: Public
+timestamp: '2024-02-29T19:16:41+00:00'
+requested_by: jellefoks
+provider: github
+branch: main
+detected_tools_count: 1
+tools:
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/2lambda123/cobalt
+  detection_source: Repo Metadata
